@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eemmnnyy Color Dice</title>
+    <link rel="stylesheet" href="./Roll Color Dice_files/style.css">
+</head>
+<body class="onepice-theme">
+    <div class="sea-layer"></div>
+
+    <div class="controls-top-left">
+        <button class="sound-toggle-btn" id="sound-btn">SOUND: ON</button>
+    </div>
+
+    <div class="controls-top-right">
+        <div class="info-box theme-badge" id="custom-theme-trigger">
+            <span id="selected-theme-text">THEME: EEMMNNYY</span>
+            <div class="custom-options-dropdown" id="custom-theme-list">
+                <div class="custom-theme-option" data-theme="onepice">eemmnnyy</div>
+                <div class="custom-theme-option" data-theme="dark">Dark</div>
+                <div class="custom-theme-option" data-theme="meowl">Meowl</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="game-layout">
+        <main class="main-card">
+            <h1 class="title">eemmnnyy Color Dice</h1>
+            <div class="subtitle">Made by:eemmnnyy</div>
+
+            <div class="info-row">
+                <div class="info-box select-container" id="custom-select-trigger">
+                    <span id="selected-value-text">3 Dice</span>
+                    <div class="custom-options-dropdown" id="custom-options-list">
+                        <div class="custom-option" data-value="1">1 Dice</div>
+                        <div class="custom-option" data-value="2">2 Dice</div>
+                        <div class="custom-option" data-value="3">3 Dice</div>
+                        <div class="custom-option" data-value="4">4 Dice</div>
+                        <div class="custom-option" data-value="5">5 Dice</div>
+                        <div class="custom-option" data-value="6">6 Dice</div>
+                    </div>
+                </div>
+                <div class="info-box">Color Dice</div>
+            </div>
+
+            <div class="funko-stage" aria-label="Theme character on ship">
+                <div class="pirate-ship" aria-hidden="true">
+                    <div class="ship-wave ship-wave-back"></div>
+                    <div class="ship-hull"></div>
+                    <div class="ship-deck"></div>
+                    <div class="ship-mast"></div>
+                    <div class="ship-sail"></div>
+                    <div class="ship-flag"></div>
+                    <div class="ship-wave ship-wave-front"></div>
+                </div>
+                <div class="funko-figure">
+                    <img class="character-image" src="./Roll Color Dice_files/onepice-funko-cutout.png" alt="Onepice Funko Pop">
+                    <span class="hat-shine"></span>
+                </div>
+            </div>
+
+            <div class="dice-container" id="dice-grid"></div>
+
+            <div class="promo-text">TGK - eemmnnyy TT - eemmnnyy</div>
+
+            <button class="btn btn-purple" id="roll-btn">ROLL AGAIN!</button>
+            <button class="btn btn-gradient" id="mega-btn">MEGA ROLL</button>
+            <button class="btn btn-hyper" id="hyper-btn">HYPER ROLL</button>
+
+            <div class="footer-text">
+                Possible colors are:
+                <span style="color: #e11d2e;">Red</span>,
+                <span style="color: #f97316;">Orange</span>,
+                <span style="color: #facc15;">Yellow</span>,
+                <span style="color: #22c55e;">Green</span>,
+                <span style="color: #2563eb;">Blue</span>, and
+                <span style="color: #9333ea;">Purple</span>.
+            </div>
+        </main>
+
+        <aside class="trade-panel-right">
+            <div class="trade-panel-title">COLORS</div>
+            <div class="trade-row" style="--row-color: #e11d2e;"><span class="trade-dot"></span><div class="trade-text"><span class="trade-name">Red</span><span class="trade-sub">L Trade</span></div></div>
+            <div class="trade-row" style="--row-color: #f97316;"><span class="trade-dot"></span><div class="trade-text"><span class="trade-name">Orange</span><span class="trade-sub">No Thanks</span></div></div>
+            <div class="trade-row" style="--row-color: #facc15;"><span class="trade-dot"></span><div class="trade-text"><span class="trade-name">Yellow</span><span class="trade-sub">Deal</span></div></div>
+            <div class="trade-row" style="--row-color: #22c55e;"><span class="trade-dot"></span><div class="trade-text"><span class="trade-name">Green</span><span class="trade-sub">Fair Trade</span></div></div>
+            <div class="trade-row" style="--row-color: #2563eb;"><span class="trade-dot"></span><div class="trade-text"><span class="trade-name">Blue</span><span class="trade-sub">Last Offer</span></div></div>
+            <div class="trade-row" style="--row-color: #9333ea;"><span class="trade-dot"></span><div class="trade-text"><span class="trade-name">Purple</span><span class="trade-sub">Add More</span></div></div>
+        </aside>
+    </div>
+
+    <section class="voyage-screen" id="voyage-screen" aria-hidden="true">
+        <div class="voyage-sky"></div>
+        <div class="voyage-water"></div>
+        <div class="voyage-ship-wrap" id="voyage-ship">
+            <div class="pirate-ship voyage-ship" aria-hidden="true">
+                <div class="ship-wave ship-wave-back"></div>
+                <div class="ship-hull"></div>
+                <div class="ship-deck"></div>
+                <div class="ship-mast"></div>
+                <div class="ship-sail"></div>
+                <div class="ship-flag"></div>
+                <div class="ship-wave ship-wave-front"></div>
+            </div>
+            <div class="funko-figure voyage-funko" id="voyage-funko">
+                <img class="character-image" src="./Roll Color Dice_files/onepice-funko-cutout.png" alt="Onepice Funko Pop">
+                <span class="hat-shine"></span>
+            </div>
+        </div>
+        <div class="voyage-colors" id="voyage-colors"></div>
+    </section>
+
+    <section class="hyper-screen" id="hyper-screen" aria-hidden="true">
+        <div class="hyper-stars"></div>
+        <div class="hyper-arena" id="hyper-arena">
+            <div class="hyper-impact-ring" id="hyper-impact-ring"></div>
+            <img class="hyper-fighter hyper-funko" id="hyper-funko" src="./Roll Color Dice_files/hyper-funko.png" alt="Funko fighter">
+            <img class="hyper-fighter hyper-dragon" id="hyper-dragon" src="./Roll Color Dice_files/dragon-canneloni.png" alt="Dragon Canneloni">
+        </div>
+        <div class="hyper-colors" id="hyper-colors"></div>
+        <div class="hyper-flash" id="hyper-flash"></div>
+    </section>
+
+    <script src="./Roll Color Dice_files/script.js.Без названия"></script>
+</body>
+</html>
