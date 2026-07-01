@@ -1,4 +1,4 @@
-﻿const colors = {
+const colors = {
     blue: '#2563eb',
     red: '#e11d2e',
     yellow: '#facc15',
@@ -34,30 +34,51 @@ const hyperDragon = document.getElementById('hyper-dragon');
 const hyperColors = document.getElementById('hyper-colors');
 const hyperFlash = document.getElementById('hyper-flash');
 const hyperImpactRing = document.getElementById('hyper-impact-ring');
+const brainrotBalanceEl = document.getElementById('brainrot-balance');
+const counterButtons = document.querySelectorAll('.counter-btn');
+const counterCharacter = document.getElementById('counter-character');
 
 let currentTheme = 'onepice';
 let globalAudioCtx = null;
 let isSoundEnabled = true;
 let currentDiceCount = 3;
+let brainrotStats = { balance: 0 };
 
 const themes = {
     onepice: {
         bodyClass: 'onepice-theme',
         label: 'EEMMNNYY',
         image: './Roll Color Dice_files/onepice-funko-cutout.png',
+        hyperImage: './Roll Color Dice_files/hyper-funko.png',
         alt: 'Onepice Funko Pop'
     },
     dark: {
         bodyClass: 'dark-theme',
         label: 'DARK',
         image: './Roll Color Dice_files/onepice-funko-cutout.png',
+        hyperImage: './Roll Color Dice_files/hyper-funko.png',
         alt: 'Dark Funko Pop'
     },
     meowl: {
         bodyClass: 'meowl-theme',
         label: 'MEOWL',
         image: './Roll Color Dice_files/meowl.png',
+        hyperImage: './Roll Color Dice_files/meowl.png',
         alt: 'Meowl cat'
+    },
+    strawberry: {
+        bodyClass: 'strawberry-theme',
+        label: 'STRAWBERRY ELEPHANT',
+        image: './Roll Color Dice_files/strawberry-elephant.png',
+        hyperImage: './Roll Color Dice_files/strawberry-elephant.png',
+        alt: 'Strawberry Elephant'
+    },
+    horseman: {
+        bodyClass: 'horseman-theme',
+        label: 'HEADLESS HORSEMAN',
+        image: './Roll Color Dice_files/headless-horseman.png',
+        hyperImage: './Roll Color Dice_files/headless-horseman.png',
+        alt: 'Headless Horseman'
     }
 };
 
@@ -79,7 +100,47 @@ function applyTheme(themeName) {
         img.src = theme.image;
         img.alt = theme.alt;
     });
+    if (hyperFunko) {
+        hyperFunko.src = theme.hyperImage;
+        hyperFunko.alt = `${theme.alt} fighter`;
+    }
     localStorage.setItem('rollDiceTheme', currentTheme);
+}
+
+function loadBrainrotStats() {
+    try {
+        const savedStats = JSON.parse(localStorage.getItem('brainrotCounterStats'));
+        if (savedStats && typeof savedStats === 'object') {
+            brainrotStats = {
+                balance: Number(savedStats.balance) || 0
+            };
+        }
+    } catch (error) {
+        brainrotStats = { balance: 0 };
+    }
+    renderBrainrotStats();
+}
+
+function renderBrainrotStats() {
+    if (brainrotBalanceEl) {
+        brainrotBalanceEl.textContent = brainrotStats.balance > 0 ? `+${brainrotStats.balance}` : String(brainrotStats.balance);
+        brainrotBalanceEl.classList.toggle('negative', brainrotStats.balance < 0);
+    }
+    localStorage.setItem('brainrotCounterStats', JSON.stringify(brainrotStats));
+}
+
+function bumpCounterCharacter() {
+    if (!counterCharacter) return;
+    counterCharacter.classList.remove('counter-pop');
+    void counterCharacter.offsetWidth;
+    counterCharacter.classList.add('counter-pop');
+    setTimeout(() => counterCharacter.classList.remove('counter-pop'), 520);
+}
+
+function adjustBrainrotBalance(amount) {
+    brainrotStats.balance += amount;
+    renderBrainrotStats();
+    bumpCounterCharacter();
 }
 
 if (selectTrigger && optionsList) {
@@ -637,9 +698,13 @@ if (soundBtn) {
         soundBtn.innerText = isSoundEnabled ? 'SOUND: ON' : 'SOUND: OFF';
     };
 }
+counterButtons.forEach(button => {
+    button.onclick = () => adjustBrainrotBalance(parseInt(button.dataset.counterChange, 10));
+});
 if (rollBtn) rollBtn.onclick = () => { initAudio(); rollDice(currentDiceCount, false); };
 if (megaBtn) megaBtn.onclick = () => { initAudio(); rollDice(currentDiceCount, true); };
 if (hyperBtn) hyperBtn.onclick = () => { initAudio(); hyperRoll(currentDiceCount); };
 
 applyLoadedTheme();
+loadBrainrotStats();
 renderStartingDice();
